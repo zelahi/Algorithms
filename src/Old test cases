@@ -1,0 +1,12 @@
+//System.out.print("Total execution Time = " + (endTime - startTime));
+
+/*for(int i=0; i < testArray.length; i++) 
+	System.out.print(testArray[i] + " ");   */
+
+/*sortTest2.rQsort(testArray, 0, testArray.length-1);
+for(int i=0; i < testArray.length; i++) 
+System.out.print(testArray[i] + " ");  */
+
+/*Quickselect.quickselect(testArray, k);
+for(int i=0; i < testArray.length; i++) 
+System.out.print(testArray[i] + " "); */
