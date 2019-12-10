@@ -7,7 +7,57 @@ class node:
 class binary_search_tree:
     def __init__(self):
         self.root=None
+    
+    def delete(self, value):
+        if self.root is None:
+            return
 
+        self._delete(self.root, value)
+    
+    def _delete(self, curr_node, value):
+        if curr_node is None:
+            return
+
+        if value < curr_node.value:
+            self._delete(curr_node.left, value)
+        elif value > curr_node.value:
+            self._delete(curr_node.right, value)
+        else:
+            if curr_node.left is None:
+                temp = curr_node.right
+                curr_node = None
+                return temp
+            elif curr_node.right is None:
+                temp = curr_node.left
+                curr_node = None
+                return temp
+
+            temp = self._find_min_value_node(curr_node.right)
+            curr_node.value = temp.value
+            curr_node.right = self._delete(curr_node.right, temp.value)
+        return self.root
+
+    def _find_min_value_node(self, curr_node):
+        # loop down until we find the leftmost node
+        while curr_node.left is not None:
+            curr_node = curr_node.left
+        return curr_node
+
+    def height(self):
+        if self.root is None:
+            return 0
+
+        return self._height(self.root)
+    
+    def _height(self, curr_node):
+        if curr_node is None:
+            return 0
+        
+        lh = self._height(curr_node.left)
+        rh = self._height(curr_node.right)
+
+        return 1 + max(lh, rh)
+        
     def insert(self, value):
         if self.root is None:
             self.root = node(value)
@@ -104,7 +154,6 @@ class binary_search_tree:
             curr_node = stack2.pop()
             print(curr_node.value)
 
-
     def _print_preorder_tree(self, curr_node):
         if curr_node is not None:
             print(curr_node.value)
@@ -144,4 +193,10 @@ print("==== Post order traversal ====")
 tree.print_tree("postorder")
 print("==== Post order traversal Iterative ====")
 tree.print_tree("postorder_i")
+print("==== Test Delete function ====")
+tree.delete(5)
+tree.print_tree("inorder")
+print("==== Calculate Tree Height ====")
+print(tree.height())
 
+                    
