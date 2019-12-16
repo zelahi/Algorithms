@@ -1,0 +1,18 @@
+Diagram
+==========
+7 -------------------->   25 --------------->  53
+|                         |                    |
+v                         v                    v 
+7 -------> 15 -------->   25 ------> 42 ---->  53
+|           |             |                    |
+v           v             v                    v
+7 -> 11 -> 15 ->  22 ->  25 ->  30 -> 42   ->  53
+
+Each level has a midpoint and a start and end.  Each level divides the list in half
+
+Assign a height to a node -> this height is defined using a probability distribution
+- The parent layer contains half as many nodes -> searching is O(log n)
+
+Insert
+======
+Insert is done at the same time as searching.  We insert whenever we go a level down
