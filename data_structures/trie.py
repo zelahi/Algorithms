@@ -45,9 +45,19 @@ class Trie:
             node = node.child[char]
         return True
 
-
-# Your Trie object will be instantiated and called as such:
-# obj = Trie()
-# obj.insert(word)
-# param_2 = obj.search(word)
-# param_3 = obj.startsWith(prefix)
+    def delete(self, word):
+        return self.__delete(self.root, word, 0)
+    
+    def __delete(self, node, word, i):
+        if len(word) == i:
+            if not node.isEnd:
+                return False
+            node.isEnd = False
+            return len(node.child) == 0
+        if word[i] not in node.child:
+            return False
+        to_delete = self.__delete(node.child[word[i]], word, i+1)
+        if to_delete:
+            node.child.pop(word[i])
+            return len(node.child) == 0
+        return False
